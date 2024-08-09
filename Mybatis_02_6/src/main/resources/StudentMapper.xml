@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ling.dao.StudentMapper">
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+<!--    定制的二级缓存 先入先出 每60刷新一次 最多存储512个引用 只读-->
+    <select id="getStudentById" resultType="Student" parameterType="int">
+        select *from student where id = #{id}
+    </select>
+    <update id="upDateStudent" parameterType="map" >
+        update student set name =  #{name} where id = #{id}
+    </update>
+
+</mapper>
